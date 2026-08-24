@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0C864"/>
+      <stop offset="55%" stop-color="#D4A017"/>
+      <stop offset="100%" stop-color="#8B5E34"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="57" fill="none" stroke="url(#lg1)" stroke-width="2.5"/>
+  <circle cx="60" cy="60" r="49" fill="none" stroke="url(#lg1)" stroke-width="1"/>
+  <g fill="none" stroke="url(#lg1)" stroke-width="1.4">
+    <path d="M60 11 L60 20 M60 100 L60 109 M11 60 L20 60 M100 60 L109 60"/>
+    <path d="M27 27 L33 33 M87 27 L81 33 M27 93 L33 87 M87 93 L81 87"/>
+  </g>
+  <text x="60" y="72" text-anchor="middle" font-family="'Marcellus', Georgia, serif" font-size="38" fill="url(#lg1)">DT</text>
+</svg>
