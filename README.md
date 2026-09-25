@@ -69,6 +69,39 @@ Targeted at "pandit in UAE / Dubai / Abu Dhabi / Sharjah" searches:
 4. Get listed in UAE Indian-community directories and temple/community pages (backlinks).
 5. Publish the six article stubs as real pages — each one is a separate chance to rank.
 
+## Site structure
+
+The site is ten pages, not one. A single page cannot rank for "pandit in Dubai",
+"satyanarayan katha dubai" and "kundali matching abu dhabi" at the same time — the
+sites currently ranking each run a page per city and per ceremony.
+
+```
+/                          home — pandit in UAE
+/pandit-in-dubai/          city pages
+/pandit-in-abu-dhabi/
+/pandit-in-sharjah/
+/griha-pravesh-puja/       ceremony pages
+/satyanarayan-katha/
+/hindu-wedding-pandit/
+/havan-puja/
+/kundali-matching/
+/mata-ki-chowki/
+```
+
+Regenerate them with:
+
+```
+python build-city-pages.py       # the three city pages
+python build-service-pages.py    # the six ceremony pages
+python build-sitemap.py          # sitemap.xml, from whatever exists on disk
+```
+
+Edit the content in the `CITIES` / `SERVICES` lists at the top of each builder,
+not in the generated HTML — a rebuild overwrites it. Each page carries its own
+title, description, canonical, H1 and ~1,000 words of distinct copy, plus
+LocalBusiness/Service, BreadcrumbList and FAQPage schema. Keep the copy genuinely
+different per page: near-duplicate pages get filtered by Google and can hurt.
+
 ## Images and page weight
 
 The photos were 2.78 MB of oversized JPEGs — the gallery tiles alone shipped roughly

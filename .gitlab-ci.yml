@@ -18,7 +18,8 @@ pages:
     - mkdir -p public
     - cp index.html styles.css script.js robots.txt sitemap.xml public/
     - cp -r images public/
-    - cp -r pandit-in-dubai pandit-in-abu-dhabi pandit-in-sharjah public/
+    # every directory holding an index.html is a landing page
+    - for d in */; do [ -f "$d/index.html" ] && cp -r "$d" public/; done; true
   artifacts:
     paths:
       - public

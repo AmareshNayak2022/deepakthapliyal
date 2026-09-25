@@ -31,6 +31,15 @@ WA_SVG = ('<svg viewBox="0 0 32 32" class="icon-sm" aria-hidden="true"><path d="
           '-.3.33-1.15 1.13-1.15 2.75s1.18 3.19 1.34 3.41c.16.22 2.32 3.54 5.62 4.96.79.34 1.4.54 1.87.7.79.25 '
           '1.5.21 2.07.13.63-.09 1.93-.79 2.2-1.55.27-.76.27-1.42.19-1.55-.08-.14-.3-.22-.63-.38z"/></svg>')
 
+SERVICE_LINKS = [
+    ("griha-pravesh-puja", "Griha Pravesh Puja"),
+    ("satyanarayan-katha", "Satyanarayan Katha"),
+    ("hindu-wedding-pandit", "Hindu Wedding"),
+    ("havan-puja", "Havan & Fire Rituals"),
+    ("kundali-matching", "Kundali Matching"),
+    ("mata-ki-chowki", "Mata Ki Chowki"),
+]
+
 CITIES = [
     {
         "slug": "dubai",
@@ -235,6 +244,10 @@ def build(city):
       </details>''' for q, a in city["faq"]
     )
 
+    service_links = "".join(
+        f'<li><a href="../{sl}/">{nm}</a></li>' for sl, nm in SERVICE_LINKS
+    )
+
     others = "".join(
         f'<li><a href="../pandit-in-{c["slug"]}/">Pandit in {c["name"]}</a></li>'
         for c in CITIES if c["slug"] != slug
@@ -403,6 +416,16 @@ def build(city):
       <p class="section-sub">Ceremonies performed at homes, villas, community halls and venues throughout the emirate.</p>
     </div>
     <ul class="area-chips">{areas_html}</ul>
+    <div class="link-cols ceremonies-block">
+      <div>
+        <h3>Ceremonies Performed Here</h3>
+        <ul class="link-list">{service_links}</ul>
+      </div>
+      <div>
+        <h3>Other Cities</h3>
+        <ul class="link-list">{others}</ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -478,24 +501,3 @@ for city in CITIES:
     os.makedirs(d, exist_ok=True)
     io.open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(build(city))
     print(f'  {d}/index.html  ({len(build(city))//1024} KB)')
-
-# sitemap covering the home page plus every city page
-urls = [(SITE + "/", "1.0", "weekly")] + [
-    (f'{SITE}/pandit-in-{c["slug"]}/', "0.9", "monthly") for c in CITIES
-]
-entries = "\n".join(
-    f'''  <url>
-    <loc>{u}</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>{cf}</changefreq>
-    <priority>{p}</priority>
-  </url>''' for u, p, cf in urls
-)
-io.open("sitemap.xml", "w", encoding="utf-8").write(
-    f'''<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{entries}
-</urlset>
-'''
-)
-print(f"  sitemap.xml ({len(urls)} URLs)")
