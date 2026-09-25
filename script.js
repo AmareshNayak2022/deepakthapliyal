@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll reveal for key sections
   const revealTargets = document.querySelectorAll(
-    '.service-card, .feature-row, .about-grid, .article-card, .gallery-item, .section-head'
+    '.service-card, .feature-row, .about-grid, .article-card, .gallery-item, .section-head, .city-card'
   );
   revealTargets.forEach(el => el.classList.add('reveal'));
 
@@ -92,13 +92,30 @@ document.addEventListener('DOMContentLoaded', () => {
     revealTargets.forEach(el => el.classList.add('in-view'));
   }
 
-  // Contact form (static/demo — no backend wired up)
+  // Contact form — no backend on a static host, so the enquiry is handed
+  // straight to WhatsApp with every field pre-filled.
+  const WHATSAPP_NUMBER = '919410770925';
   const form = document.getElementById('contact-form');
   const note = document.getElementById('form-note');
   if (form && note) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      note.textContent = 'Thank you — this is a demo form. Connect it to your email or booking service to go live.';
+      const data = new FormData(form);
+      const lines = [
+        'Namaste Acharya Ji,',
+        '',
+        'Name: ' + (data.get('name') || '—'),
+        'Phone: ' + (data.get('phone') || '—'),
+        'Email: ' + (data.get('email') || '—'),
+        'City: ' + (data.get('city') || '—'),
+        'Ceremony: ' + (data.get('ceremony') || '—'),
+        '',
+        (data.get('message') || '').trim()
+      ];
+      const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' +
+        encodeURIComponent(lines.join('\n').trim());
+      window.open(url, '_blank', 'noopener');
+      note.textContent = 'Opening WhatsApp with your enquiry — if nothing opens, call +91 94107 70925 directly.';
     });
   }
 

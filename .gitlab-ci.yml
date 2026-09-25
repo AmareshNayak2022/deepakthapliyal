@@ -1,0 +1,25 @@
+# GitLab Pages — publishes this static site from the repository root.
+#
+# GitLab Pages serves whatever the `pages` job leaves in the `public/`
+# directory, so the site files are copied there on every push to the
+# default branch.
+#
+# After the first successful pipeline:
+#   Settings -> Pages   : note the generated URL
+#   Deploy -> Pages     : add the custom domain deepakthapliyal.com
+#   Then add the DNS records GitLab shows you (an A record plus the
+#   _gitlab-pages-verification-code TXT record) at your registrar.
+
+image: alpine:latest
+
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp index.html styles.css script.js robots.txt sitemap.xml public/
+    - cp -r images public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
