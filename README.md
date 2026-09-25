@@ -69,6 +69,30 @@ Targeted at "pandit in UAE / Dubai / Abu Dhabi / Sharjah" searches:
 4. Get listed in UAE Indian-community directories and temple/community pages (backlinks).
 5. Publish the six article stubs as real pages — each one is a separate chance to rank.
 
+## Images and page weight
+
+The photos were 2.78 MB of oversized JPEGs — the gallery tiles alone shipped roughly
+ten times the pixels they display. `optimize-images.py` resizes each photo to about
+twice its CSS display width and writes a WebP twin next to the JPEG:
+
+```
+python optimize-images.py     # re-run after replacing any photo
+```
+
+Every photo in `index.html` is wrapped in `<picture>`, so modern browsers take the
+WebP and anything older falls back to the JPEG. All images carry explicit
+`width`/`height` so the layout does not jump while they load, and the hero portrait
+is preloaded with `fetchpriority="high"` because it is the Largest Contentful Paint
+element.
+
+| | before | after |
+|---|---|---|
+| All photos | 2,780 KB | 821 KB (WebP) |
+| First view (HTML + CSS + JS + hero) | ~1.5 MB | **214 KB** |
+
+If you replace a photo, drop the new file in as `images/<same-name>.jpg`, re-run the
+script, and commit both the `.jpg` and the regenerated `.webp`.
+
 ## Editing content
 
 Everything is plain HTML/CSS — no build tools or frameworks.

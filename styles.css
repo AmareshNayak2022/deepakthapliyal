@@ -67,6 +67,11 @@ h1, h2, h3, h4 { font-family: var(--font-display); margin: 0 0 0.5em; line-heigh
 p { margin: 0 0 1em; line-height: 1.7; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+/* The photos are wrapped in <picture> for WebP delivery. display:contents
+   keeps the wrapper out of the box tree so every img rule below — object-fit,
+   the absolutely positioned float, the gallery hover zoom — behaves exactly
+   as it did when the img was a direct child. */
+picture { display: contents; }
 ul { list-style: none; margin: 0; padding: 0; }
 button { font-family: inherit; cursor: pointer; }
 
@@ -1152,3 +1157,10 @@ button { font-family: inherit; cursor: pointer; }
   opacity: 0.9;
 }
 .youtube-copy em { color: var(--gold-100); font-style: italic; }
+
+/* The about-section float overhangs its container by 40px, which pushed the
+   document 20px wider than the viewport on phones. Tuck it in on narrow
+   screens so nothing is clipped. */
+@media (max-width: 860px) {
+  .about-img-float { right: -12px; bottom: -24px; width: 48%; }
+}
