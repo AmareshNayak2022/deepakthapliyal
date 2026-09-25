@@ -27,6 +27,15 @@ images/          Photos and decorative graphics
 Email: `dthapliyal2011@gmail.com`
 Address: Flat 601, Block-A, Al Reem Tower (Amisa Showroom Building), Electra Street, TCA, Abu Dhabi
 
+Social profiles (linked from the Watch & Follow section, both social rows, and the
+`sameAs` property of the JSON-LD so search engines connect them to the site):
+
+- YouTube: `https://www.youtube.com/@deepakthapliyal`
+- Facebook: `https://www.facebook.com/Acharya-Deepak-Thapliyal-102544104784897`
+
+The YouTube figures (21.2K subscribers, 1,159 videos, 7.5M views) are hard-coded in the
+`.youtube-stats` list in `index.html` — they are a snapshot, so refresh them occasionally.
+
 To change a number, search `index.html` for the digits and update both the `tel:` href and
 the visible text. The WhatsApp number also appears as `WHATSAPP_NUMBER` at the top of the
 contact-form handler in `script.js`, and in the `wa.me/` links in `index.html`.
