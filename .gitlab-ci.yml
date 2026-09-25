@@ -18,6 +18,7 @@ pages:
     - mkdir -p public
     - cp index.html styles.css script.js robots.txt sitemap.xml public/
     - cp -r images public/
+    - cp -r pandit-in-dubai pandit-in-abu-dhabi pandit-in-sharjah public/
   artifacts:
     paths:
       - public
